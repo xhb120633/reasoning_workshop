@@ -7,96 +7,339 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
+    * {
+      transition: all 0.3s ease;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #e0ecff, #fefefe);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
       margin: 0;
-      padding: 0;
+      padding: 80px 0 0 0;
       color: #1e293b;
+      line-height: 1.7;
     }
     .container {
-      max-width: 960px;
-      margin: 4rem auto;
-      padding: 3rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      border-left: 8px solid #2563eb;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
     }
     h1 {
       color: #1e3a8a;
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      margin: 2rem 0 1rem 0;
+      padding: 0 3rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       color: #2563eb;
-      margin-top: 2.5rem;
+      margin: 3rem 0 1.5rem 0;
+      padding: 0 3rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-weight: 600;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 3rem;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      border-radius: 2px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      color: #1e40af;
+      margin: 2rem 0 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
     }
     .info {
-      margin: 0.75rem 0;
+      margin: 1rem 3rem;
       font-weight: 500;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border-radius: 12px;
+      border-left: 4px solid #3b82f6;
+    }
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 12px 12px;
+      border: 1px solid rgba(203, 213, 225, 0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      width: auto;
+      max-width: 600px;
+    }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: #475569;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+    }
+    .nav-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      border-color: transparent;
+    }
+    .nav-btn i {
+      font-size: 0.9rem;
     }
     .section {
-      margin-top: 2.5rem;
+      margin: 3rem 0;
+      padding: 0 3rem 2rem 3rem;
+    }
+    .overview-content {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 1px solid #e2e8f0;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .overview-content p {
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      text-align: justify;
+    }
+    .topics-section {
+      margin-top: 2rem;
+    }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .topic-item {
+      background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+      padding: 1.2rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border: 1px solid #bfdbfe;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+      transform: translateY(0);
+    }
+    .topic-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+    }
+    .topic-item i {
+      font-size: 1.2rem;
+      color: #2563eb;
+      background: white;
+      padding: 0.6rem;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+    }
+    .topic-item span {
+      font-weight: 500;
+      color: #1e40af;
+      font-size: 0.9rem;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
     }
     .card {
-      background: #eff6ff;
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
       padding: 1.2rem;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
-      border: 1px solid #dbeafe;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     }
     .card img {
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
       border-radius: 50%;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.8rem;
       border: 2px solid #3b82f6;
+      box-shadow: 0 3px 8px rgba(59, 130, 246, 0.3);
     }
     .card .name {
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 1rem;
+      color: #1e293b;
+      margin-bottom: 0.4rem;
     }
     .card .affil {
-      font-size: 0.95rem;
-      color: #475569;
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 500;
     }
     .banner {
-      background-color: #2563eb;
+      background: linear-gradient(135deg, #1e40af, #2563eb);
       color: white;
       text-align: center;
-      padding: 1.3rem 2rem;
-      border-radius: 12px 12px 0 0;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0 20 Q 50 0 100 20 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: 100px 20px;
     }
     .banner p {
       margin: 0;
-      font-size: 1.3rem;
-      font-weight: 500;
+      font-size: 1.1rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     .footer {
       margin-top: 4rem;
       text-align: center;
       font-size: 1rem;
       color: #64748b;
+      padding: 2rem 3rem;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-top: 1px solid #e2e8f0;
+    }
+    .schedule-container {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .schedule-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+      position: relative;
+    }
+    .schedule-item:last-child {
+      border-bottom: none;
+    }
+    .schedule-item::before {
+      content: '';
+      position: absolute;
+      left: 145px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+    .schedule-item .time {
+      font-weight: 700;
+      color: #1e40af;
+      min-width: 140px;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #bfdbfe;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+    }
+    .schedule-item .event {
+      flex: 1;
+      padding-left: 1.5rem;
+      padding-top: 0.3rem;
+    }
+    .schedule-item .event strong {
+      color: #1e293b;
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .schedule-item .event em {
+      color: #64748b;
+      font-style: italic;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .schedule-item.panel {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      margin: 0.8rem -2rem;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+    .schedule-item.panel::before {
+      background: linear-gradient(180deg, #10b981, #059669);
+      left: 145px;
+    }
+    .schedule-item.panel .time {
+      background: linear-gradient(135deg, #ffffff, #ecfdf5);
+      color: #166534;
+      border-color: #10b981;
     }
   </style>
 </head>
 <body>
+  <nav class="navigation">
+    <a href="#overview" class="nav-btn"><i class="bi bi-journal-text"></i> Overview</a>
+    <a href="#schedule" class="nav-btn"><i class="bi bi-clock"></i> Schedule</a>
+    <a href="#presenters" class="nav-btn"><i class="bi bi-person-lines-fill"></i> Presenters</a>
+    <a href="#organizers" class="nav-btn"><i class="bi bi-people-fill"></i> Organizers</a>
+  </nav>
+  
   <div class="container">
     <div class="banner">
       <p>📍 CogSci 2025 Workshop · San Francisco · July 30</p>
@@ -106,12 +349,106 @@
     <div class="info">🕗 <strong>Time:</strong> 8:30 A.M. – 12:00 P.M. PST</div>
     <div class="info">📍 <strong>Location:</strong> Pacific Hall B, Marriott Marquis, San Francisco</div>
 
-    <div class="section">
+    <div class="section" id="overview">
       <h2><i class="bi bi-journal-text"></i> Workshop Overview</h2>
-      <p>This interdisciplinary workshop at the Cognitive Science Society Conference explores how reasoning manifests in both humans and machines. Join us to discuss strategies, models, and new advances in human cognition and artificial intelligence—bridging cognitive science and computational modeling.</p>
+      <div class="overview-content">
+        <p>Reasoning is one of the hallmarks of both natural and artificial intelligence. Understanding how reasoning operates in the human mind is crucial in cognitive science. Despite a long history of research on human reasoning—ranging from heuristics and mental models to Bayesian modeling and neuroscience—little is known about how humans reason so flexibly in real life and how reasoning contributes to high-level cognitive functions including planning, social interaction, complex problem-solving, and open-ended mental exploration.</p>
+        
+        <p>Previous studies face significant challenges that hinder a deeper understanding of reasoning, including the difficulty of designing well-balanced experimental paradigms that maintain both control and ecological validity, efficient data collection and analysis beyond pure behavioral measures, and understanding complex interactions between reasoning and other high-level cognitive functions, such as memory, theory of mind, and language.</p>
+        
+        <p>With the rapid development of Artificial Intelligence (AI), particularly Large Language Models (LLMs), we now have the first artificial systems that have been claimed to show human-like reasoning capabilities. Recent reasoning models have reached or even surpassed human performance on numerous benchmarks, showcasing the potential for highly capable reasoning systems. However, a major challenge in AI research remains limited understanding of the underlying reasoning processes used by these models.</p>
+        
+        <p><strong>To bridge the gap between human and machine reasoning</strong>—and to facilitate both a better understanding of human cognition and improved AI reasoning capabilities—this workshop brings together leading scholars from cognitive science, psychology, neuroscience, and computer science.</p>
+      </div>
+      
+      <div class="topics-section">
+        <h3><i class="bi bi-lightbulb"></i> Key Topics</h3>
+        <div class="topics-grid">
+          <div class="topic-item">
+            <i class="bi bi-brain"></i>
+            <span>Human reasoning strategies and heuristics</span>
+          </div>
+          <div class="topic-item">
+            <i class="bi bi-search"></i>
+            <span>Methods for studying human reasoning</span>
+          </div>
+          <div class="topic-item">
+            <i class="bi bi-chat-dots"></i>
+            <span>How language reflects or informs reasoning</span>
+          </div>
+          <div class="topic-item">
+            <i class="bi bi-cpu"></i>
+            <span>Instilling reasoning skills in machines</span>
+          </div>
+          <div class="topic-item">
+            <i class="bi bi-diagram-3"></i>
+            <span>Neural substrates underlying reasoning</span>
+          </div>
+          <div class="topic-item">
+            <i class="bi bi-people"></i>
+            <span>Interdisciplinary perspectives on intelligence</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="schedule">
+      <h2><i class="bi bi-clock"></i> Schedule</h2>
+      <div class="schedule-container">
+        <div class="schedule-item">
+          <div class="time">8:30 - 9:00 AM</div>
+          <div class="event">
+            <strong>Ulrike Hahn</strong><br>
+            <em>Title: TBD</em>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="time">9:00 - 9:30 AM</div>
+          <div class="event">
+            <strong>Anna Ivanova</strong><br>
+            <em>Title: TBD</em>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="time">9:30 - 10:00 AM</div>
+          <div class="event">
+            <strong>David Lagnado</strong><br>
+            <em>Title: TBD</em>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="time">10:00 - 10:30 AM</div>
+          <div class="event">
+            <strong>Andrew Lampinen</strong> ☕<br>
+            <em>Title: TBD<br>
+            (Refreshments available during presentation)</em>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="time">10:30 - 11:00 AM</div>
+          <div class="event">
+            <strong>Marcelo Mattar</strong><br>
+            <em>Title: TBD</em>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="time">11:00 - 11:30 AM</div>
+          <div class="event">
+            <strong>Mark Ho</strong><br>
+            <em>Title: TBD</em>
+          </div>
+        </div>
+        <div class="schedule-item panel">
+          <div class="time">11:30 - 12:00 PM</div>
+          <div class="event">
+            <strong>🎤 Panel Discussion</strong><br>
+            <em>All speakers + audience Q&A</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="presenters">
       <h2><i class="bi bi-person-lines-fill"></i> Presenters</h2>
       <div class="grid">
         <div class="card"><img src="photos/Ulrike Hahn.jpeg" alt="Ulrike Hahn"><div class="name">Ulrike Hahn</div><div class="affil">Birkbeck, University of London</div></div>
@@ -123,7 +460,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="organizers">
       <h2><i class="bi bi-people-fill"></i> Organizing Committee</h2>
       <div class="grid">
         <div class="card"><img src="photos/Hanbo Xie.jpg" alt="Hanbo Xie"><div class="name">Hanbo Xie</div><div class="affil">Georgia Tech</div></div>
